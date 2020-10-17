@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- CSS -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+<link rel="stylesheet" href="{% static "css/animate.css" %}">
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+<link rel="stylesheet" href="{% static "css/media-queries.css" %}">
+
+<!-- Favicon and touch icons -->
+<link rel="shortcut icon" href="{% static "ico/favicon.png"%}">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static "ico/apple-touch-icon-144-precomposed.png" %}">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static "ico/apple-touch-icon-114-precomposed.png" %}">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static "ico/apple-touch-icon-72-precomposed.png" %}">
+<link rel="apple-touch-icon-precomposed" href="{% static "ico/apple-touch-icon-57-precomposed.png" %}">
+  </head>
+  <body>
+    <!-- Top menu -->
+  		<nav class="navbar navbar-dark fixed-top navbar-expand-md navbar-no-bg">
+  			<div class="container">
+  				<a class="navbar-brand" href="{% url "index" %}">Navbar w/ text</a>
+  			    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  			        <span class="navbar-toggler-icon"></span>
+  			    </button>
+  			    <div class="collapse navbar-collapse" id="navbarNav">
+  			        <ul class="navbar-nav ml-auto">
+  			            <li class="nav-item">
+  			                <a class="nav-link scroll-link" href="{% url 'admin:index' %}">Admin</a>
+  			            </li>
+  			            <li class="nav-item">
+  			                <a class="nav-link scroll-link" href="{% url 'basic_app:other' %}">Other</a>
+  			            </li>
+
+                    {% if user.is_authenticated %}
+
+                    <li class="nav-item">
+  			                <a  class="nav-link scroll-link" href="#user"><p style="color:blue;">{{request.user.username}}</p></a>
+  			            </li>
+
+  			                <a class="nav-link scroll-link" href="{% url 'basic_app:logout'%}">Logout</a>
+  			            </li>
+
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link scroll-link" href="{% url 'basic_app:register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll-link" href="{% url 'basic_app:user_login' %}">Login</a>
+                    </li>
+                    {% endif %}
+
+  			           
+  			        </ul>
+  			    </div>
+  		    </div>
+  		</nav>
+
+      <div class="">
+
+        {% block body_block %}
+        {% endblock %}
+      </div>
+
+  </body>
+</html>
